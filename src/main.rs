@@ -1,3 +1,5 @@
+use task_manager::cli::cli_builder;
+
 fn main() {
-    println!("Hello, world!");
+    cli_builder().get_matches();
 }
