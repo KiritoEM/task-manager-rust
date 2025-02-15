@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use std::{process::exit, str::FromStr};
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 use crate::{load_tasks_file, save_tasks_file};
@@ -7,7 +7,7 @@ pub mod utils;
 
 use utils::{index_of_task, is_task_exist};
 
-#[derive(Debug, Clone, ValueEnum, Deserialize, Serialize)]
+#[derive(Debug, Clone, ValueEnum, Deserialize, Serialize, PartialEq)]
 pub enum TaskStatus {
     TODO,
     INPROGRESS,
@@ -42,7 +42,8 @@ pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
     let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
 
     if is_task_exist(&tasks, &task.name) {
-        return Err(std::io::Error::new(std::io::ErrorKind::AlreadyExists, "Task already exists"));
+        println!("\n\nTask already exist");
+        exit(1);
     }
 
     tasks.push(task);
@@ -59,7 +60,8 @@ pub fn delete_task(task_name: &String, path: &String) -> Result<(), std::io::Err
     let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
 
     if !is_task_exist(&tasks, &task_name) {
-        return Err(std::io::Error::new(std::io::ErrorKind::NotFound, "Task not found"));
+        println!("\n\nTask not found");
+        exit(1);
     }
 
     let index = index_of_task(&task_name, &tasks);

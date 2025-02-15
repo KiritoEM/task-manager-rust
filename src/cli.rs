@@ -14,8 +14,8 @@ pub enum Commands {
     #[command(about="Add a new task")]
     Add(Add),
 
-    #[command(about="View list of tasks")]
-    List,
+    #[command(about="Show board of tasks")]
+    Board(Board),
 
     #[command(about="Delete an task")]
     Delete(Delete),
@@ -43,5 +43,11 @@ pub struct Delete {
     pub name: String,
 
     #[arg(short = 'f', long="file", help = "Path of task file")]
+    pub file: String,
+}
+
+#[derive(Args)]
+pub struct Board {
+    #[arg(short = 'f', long="file", help = "Path of task file to show")]
     pub file: String,
 }

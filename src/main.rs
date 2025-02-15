@@ -2,6 +2,7 @@ use clap::{CommandFactory, Parser};
 use task_manager::cli::{Commands, Cli};
 use task_manager::delete_task;
 use task_manager::task::{add_task, Task};
+use task_manager::board::show_board;
 
 fn main() {
     let cli = Cli::parse();
@@ -16,8 +17,8 @@ fn main() {
 
             add_task(task, &arg.file).expect("Failed to add task");
         },
-        Some(Commands::List) => {
-            println!("Affichage de la liste des tâches.");
+        Some(Commands::Board(arg)) => {
+            show_board(&arg.file);
         },
         Some(Commands::Delete(arg)) => {
             delete_task(&arg.name , &arg.file).expect("Failed to delete task");
