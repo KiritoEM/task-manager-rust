@@ -1,8 +1,9 @@
 use std::str::FromStr;
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
+use crate::{load_tasks_file, save_tasks_file};
 
-#[derive(Debug, Clone, ValueEnum)]
+#[derive(Debug, Clone, ValueEnum, Deserialize, Serialize)]
 pub enum TaskStatus {
     TODO,
     INPROGRESS,
@@ -24,9 +25,24 @@ impl FromStr for TaskStatus {
 
 
 #[derive(Debug, Deserialize, Serialize)]
+#[warn(unused_variables)]
 #[serde(rename_all="camelCase")]
 pub struct Task {
-    name: String,
-    status: String,
-    description: String
+    pub name: String,
+    pub  status: TaskStatus,
+    pub  description: String
+}
+
+
+pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
+    let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
+
+    tasks.push(task);
+    match save_tasks_file((&path).to_string(), &tasks) {
+        Ok(_) => {
+            println!("Task added successfully!");
+            Ok(())
+    },
+        Err(e) => return Err(e),
+    }
 }

@@ -1,5 +1,5 @@
 use clap::{arg, Args, Parser, Subcommand};
-use crate::task::TaskStatus;
+use crate::TaskStatus;
 
 #[derive(Parser)]
 #[command(author, version)]
@@ -28,4 +28,8 @@ pub struct Add {
 
     #[arg(short = 'f', long="file", help = "Path of task file")]
     pub file: String,
+
+
+    #[arg(short = 'd', long="description", help = "Description of task")]
+    pub description: String,
 }

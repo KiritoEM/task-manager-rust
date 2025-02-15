@@ -1,23 +1,19 @@
 use clap::{CommandFactory, Parser};
 use task_manager::cli::{Commands, Cli};
-use task_manager::file::load_tasks_file;
+use task_manager::task::{add_task, Task};
 
 fn main() {
     let cli = Cli::parse();
 
     match &cli.command {
         Some(Commands::Add(arg)) => {
-            println!("Ajout d'une tâche : {}", arg.name);
-            println!("Statut : {:?}", arg.status);
+            let task = Task {
+                name: arg.name.clone(),
+                status: arg.status.clone(),
+                description: arg.description.clone(),
+            };
 
-            match load_tasks_file(arg.file.clone()) {
-                Ok(contents) => {
-                    println!("File content : {:?}", contents);
-                },
-                Err(e) => {
-                    println!("Error : {}", e);
-                }
-            }
+            add_task(task, &arg.file.clone()).expect("Failed to add task");
         },
         Some(Commands::List) => {
             println!("Affichage de la liste des tâches.");
