@@ -3,9 +3,9 @@ use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 use crate::{load_tasks_file, save_tasks_file};
 
-pub mod utils;
+pub mod helpers;
 
-use utils::{index_of_task, is_task_exist};
+use helpers::{index_of_task, is_task_exist};
 
 #[derive(Debug, Clone, ValueEnum, Deserialize, Serialize, PartialEq)]
 pub enum TaskStatus {

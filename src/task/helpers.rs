@@ -1,8 +1,9 @@
 use super::Task;
+use crate::clean_str;
 
 pub fn is_task_exist (tasks: &Vec<Task>, name: &String) -> bool {
     for t in tasks.iter() {
-        if t.name.to_lowercase()== name.to_lowercase() {
+        if clean_str(&t.name)== clean_str(&name) {
             return true;
         }
       }
@@ -11,5 +12,5 @@ pub fn is_task_exist (tasks: &Vec<Task>, name: &String) -> bool {
 }
 
 pub fn index_of_task(name: &String, tasks: &Vec<Task>) -> usize {
-    tasks.iter().position(|t| t.name.to_lowercase()== name.to_lowercase()).unwrap()
+    tasks.iter().position(|t|  clean_str(&t.name)== clean_str(&name) ).unwrap()
 }
