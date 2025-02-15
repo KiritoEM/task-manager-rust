@@ -28,6 +28,23 @@ cargo build --release
 task-manager
 ```
 
+### Format du fichier JSON :
+```bash
+[
+  {
+    "name": "Task 1",
+    "status": "INPROGRESS",
+    "description": "Description 1"
+  },
+  {
+    "name": "Task 2",
+    "status": "TODO",
+    "description": "Description 2"
+  }
+]
+
+```
+
 ### Commandes disponibles :
 - **add** : Ajoute une nouvelle tâche.
 - **board** : Affiche la liste des tâches.
