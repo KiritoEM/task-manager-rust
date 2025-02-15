@@ -3,6 +3,10 @@ use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 use crate::{load_tasks_file, save_tasks_file};
 
+pub mod utils;
+
+use utils::is_task_exist;
+
 #[derive(Debug, Clone, ValueEnum, Deserialize, Serialize)]
 pub enum TaskStatus {
     TODO,
@@ -36,6 +40,10 @@ pub struct Task {
 
 pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
     let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
+
+    if is_task_exist(&tasks, &task) {
+        return Err(std::io::Error::new(std::io::ErrorKind::AlreadyExists, "Task already exists"));
+    }
 
     tasks.push(task);
     match save_tasks_file((&path).to_string(), &tasks) {
