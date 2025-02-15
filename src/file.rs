@@ -9,7 +9,11 @@ pub fn load_tasks_file(path: &String) -> Vec<Task>{
 
     file.read_to_string(&mut contents).expect("Unable to read file");
 
-    let tasks: Vec<Task> = parse_str_to_json(&contents).unwrap();
+    if contents.is_empty() {
+        return vec![];
+    }
+
+    let tasks: Vec<Task> = parse_str_to_json(&contents).expect("Failed to parse JSON");
 
     tasks
 }
