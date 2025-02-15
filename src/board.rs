@@ -7,7 +7,7 @@ pub fn show_board(path: &String)  {
     let tasks =  load_tasks_file(&path);
 
     if tasks.len() == 0 {
-        println!("\n\nNo tasks found, please add task to {path}");
+        println!("\nNo tasks found, please add task to {path}");
         exit(1)
     }
 

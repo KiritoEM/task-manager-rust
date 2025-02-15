@@ -1,7 +1,7 @@
 use std::{process::exit, str::FromStr};
 use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
-use crate::{clean_str, load_tasks_file, save_tasks_file};
+use crate::{load_tasks_file, save_tasks_file};
 
 pub mod utils;
 
@@ -38,7 +38,7 @@ pub struct Task {
 }
 
 
-pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
+pub fn add_task(task: Task, path: &String) {
     let mut tasks = load_tasks_file(&path);
 
     if is_task_exist(&tasks, &task.name) {
@@ -47,16 +47,13 @@ pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
     }
 
     tasks.push(task);
-    match save_tasks_file((&path).to_string(), &tasks) {
-        Ok(_) => {
-            println!("Task added successfully!");
-            Ok(())
-    },
-        Err(e) => return Err(e),
+    match save_tasks_file(&path, &tasks) {
+        Ok(_) => println!("\n\nTask added successfully"),
+        Err(e) => println!("\n\nError: {}", e),
     }
 }
 
-pub fn delete_task(task_name: &String, path: &String) -> Result<(), std::io::Error> {
+pub fn delete_task(task_name: &String, path: &String)  {
     let mut tasks = load_tasks_file(&path);
 
     if !is_task_exist(&tasks, &task_name) {
@@ -67,11 +64,8 @@ pub fn delete_task(task_name: &String, path: &String) -> Result<(), std::io::Err
     let index = index_of_task(&task_name, &tasks);
     tasks.remove(index);
 
-    match save_tasks_file((&path).to_string(), &tasks) {
-        Ok(_) => {
-            println!("Task deleted successfully!");
-             Ok(())
-    },
-        Err(e) => return Err(e),
+    match save_tasks_file(&path, &tasks) {
+        Ok(_) => println!("\n\nTask removed successfully"),
+        Err(e) => println!("\n\nError: {}", e),
     }
 }

@@ -16,13 +16,13 @@ fn main() {
                 description: arg.description.clone(),
             };
 
-            add_task(task, &arg.file).expect("Failed to add task");
+            add_task(task, &arg.file);
         },
         Some(Commands::Board(arg)) => {
             show_board(&arg.file);
         },
         Some(Commands::Delete(arg)) => {
-            delete_task(&arg.name , &arg.file).expect("Failed to delete task");
+            delete_task(&arg.name , &arg.file);
         },
         None => {
             Cli::command().print_help().unwrap();
