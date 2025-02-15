@@ -24,11 +24,9 @@ cargo build --release
 
 ## Usage
 
-```bash
-task-manager
-```
-
 ### Format du fichier JSON :
+Créér un fichier JSON avant d'exécuter les commandes et faites le sous le format suivant : 
+
 ```bash
 [
   {
@@ -42,7 +40,10 @@ task-manager
     "description": "Description 2"
   }
 ]
+```
 
+```bash
+task-manager
 ```
 
 ### Commandes disponibles :
