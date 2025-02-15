@@ -4,11 +4,11 @@ Un petit outil CLI permettant de gérer des tâches via des fichiers JSON dével
 
 ## Fonctionnalités
 
-[x] Ajout de tâche
-[x] Affichage des tâches en board
-[x] Suppression de tâche 
-[] Modification du status 
-[x] Sauvegarde de toutes opérations dans un fichier JSON
+- [x] Ajout de tâche
+- [x] Affichage des tâches en board
+- [x] Suppression de tâche 
+- [] Modification du status 
+- [x] Sauvegarde de toutes opérations dans un fichier JSON
 
 
 
