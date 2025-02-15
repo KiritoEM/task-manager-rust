@@ -58,7 +58,7 @@ task-manager
 ## Exemple d'utilisation
 
 - ### Ajouter une tâche 
- Crée le fichier JSON s'il n'existe pas et le status est par défaut TODO (il n'existe que TODO, INPROGRESS, DONE).
+ Le status est par défaut TODO (il n'existe que TODO, INPROGRESS, DONE).
 
 ```bash
 task-manager add --name "Développer une authentification" --status "INPROGRESS" --description "Mettre en place le système d'authentification avec JWT et 0Auth" --file "example/tasks.json"
