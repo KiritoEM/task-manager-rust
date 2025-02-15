@@ -5,7 +5,7 @@ use crate::{load_tasks_file, save_tasks_file};
 
 pub mod utils;
 
-use utils::is_task_exist;
+use utils::{index_of_task, is_task_exist};
 
 #[derive(Debug, Clone, ValueEnum, Deserialize, Serialize)]
 pub enum TaskStatus {
@@ -41,7 +41,7 @@ pub struct Task {
 pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
     let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
 
-    if is_task_exist(&tasks, &task) {
+    if is_task_exist(&tasks, &task.name) {
         return Err(std::io::Error::new(std::io::ErrorKind::AlreadyExists, "Task already exists"));
     }
 
@@ -50,6 +50,25 @@ pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
         Ok(_) => {
             println!("Task added successfully!");
             Ok(())
+    },
+        Err(e) => return Err(e),
+    }
+}
+
+pub fn delete_task(task_name: &String, path: &String) -> Result<(), std::io::Error> {
+    let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
+
+    if !is_task_exist(&tasks, &task_name) {
+        return Err(std::io::Error::new(std::io::ErrorKind::NotFound, "Task not found"));
+    }
+
+    let index = index_of_task(&task_name, &tasks);
+    tasks.remove(index);
+
+    match save_tasks_file((&path).to_string(), &tasks) {
+        Ok(_) => {
+            println!("Task deleted successfully!");
+             Ok(())
     },
         Err(e) => return Err(e),
     }
