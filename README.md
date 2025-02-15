@@ -42,6 +42,7 @@ Créér un fichier JSON avant d'exécuter les commandes et mettre le fichier sou
   }
 ]
 ```
+Pour lancer le CLI: 
 
 ```bash
 task-manager
