@@ -3,7 +3,7 @@ use crate::task::TaskStatus;
 
 #[derive(Parser)]
 #[command(author, version)]
-#[command(author = "KiritoEM", version, about = "Task manager with Rust")]
+#[command(author = "KiritoEM", version, about = "\n\nTask manager with Rust")]
 pub struct Cli {
     #[clap(subcommand)] 
    pub command: Option<Commands>,
@@ -16,9 +16,6 @@ pub enum Commands {
 
     #[command(about="View list of tasks")]
     List,
-
-    #[command(about="View task down")]
-    Done,
 }
 
 #[derive(Args)]
@@ -28,4 +25,7 @@ pub struct Add {
 
     #[arg(short = 's', long="status", default_value = "todo", help = "Status of task")]
     pub status: TaskStatus,
+
+    #[arg(short = 'f', long="file", help = "Path of task file")]
+    pub file: String,
 }
