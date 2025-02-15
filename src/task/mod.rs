@@ -39,7 +39,7 @@ pub struct Task {
 
 
 pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
-    let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
+    let mut tasks = load_tasks_file(&path);
 
     if is_task_exist(&tasks, &task.name) {
         println!("\n\nTask already exist");
@@ -57,7 +57,7 @@ pub fn add_task(task: Task, path: &String) -> Result<(), std::io::Error> {
 }
 
 pub fn delete_task(task_name: &String, path: &String) -> Result<(), std::io::Error> {
-    let mut tasks = load_tasks_file(&path).expect("Failed to load tasks");
+    let mut tasks = load_tasks_file(&path);
 
     if !is_task_exist(&tasks, &task_name) {
         println!("\n\nTask not found");

@@ -3,13 +3,8 @@ use std::process::exit;
 use crate::{load_tasks_file, TaskStatus};
 use prettytable::{row, Table};
 
-pub fn show_board(path: &String) -> Result<(), std::io::Error> {
-    let tasks = match load_tasks_file(&path) {
-        Ok(tasks) => tasks,
-        Err(_e) => {
-            vec![]
-        }
-    };
+pub fn show_board(path: &String)  {
+    let tasks =  load_tasks_file(&path);
 
     if tasks.len() == 0 {
         println!("\n\nNo tasks found, please add task to {path}");
@@ -42,6 +37,4 @@ pub fn show_board(path: &String) -> Result<(), std::io::Error> {
   
 
     task_board.printstd();
-
-    Ok(())
 }

@@ -3,19 +3,15 @@ use std::io::{Read, Error};
 use crate::parse_str_to_json;
 use crate::Task;
 
-pub fn load_tasks_file(path: &String) -> Result<Vec<Task>, Error>{
+pub fn load_tasks_file(path: &String) -> Vec<Task>{
     let mut file = File::open(path).expect("No such file in path {path}, please verify the path");
     let mut contents = String::new();
 
     file.read_to_string(&mut contents).expect("Unable to read file");
 
-    let tasks: Vec<Task> = match parse_str_to_json(&contents) {
-        Ok(tasks) => tasks,
-        Err(e) => return Err(e),
-        
-    };
+    let tasks: Vec<Task> = parse_str_to_json(&contents).unwrap();
 
-    Ok(tasks)
+    tasks
 }
 
 pub fn save_tasks_file(path: String, tasks: &Vec<Task>) -> Result<(), Error> {

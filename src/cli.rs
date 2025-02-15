@@ -51,3 +51,4 @@ pub struct Board {
     #[arg(short = 'f', long="file", help = "Path of task file to show")]
     pub file: String,
 }
+
