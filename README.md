@@ -25,7 +25,8 @@ cargo build --release
 ## Usage
 
 ### Format du fichier JSON :
-Créér un fichier JSON avant d'exécuter les commandes et faites le sous le format suivant : 
+
+Créér un fichier JSON avant d'exécuter les commandes et mettre le fichier sous le format suivant : 
 
 ```bash
 [
