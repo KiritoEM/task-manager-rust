@@ -1,7 +1,12 @@
 [
   {
     "name": "Add Navbar",
-    "status": "DONE",
+    "status": "INPROGRESS",
     "description": "Add Navbar and it's responsive"
+  },
+  {
+    "name": "Add authentification",
+    "status": "TODO",
+    "description": "Add authenticiation with JWT and 0Auth"
   }
 ]
